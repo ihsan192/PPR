@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Header from "./components/Header";
 import SensorCards from "./components/SensorCards";
 import SensorData from "./components/SensorData";
+import DeviceStatus from "./components/DeviceStatus"; // <-- 1. Import komponen DeviceStatus
 import Loading from "./components/Loading";
 
 export default function Home() {
@@ -42,10 +43,23 @@ export default function Home() {
           <SensorCards />
         </section>
 
-        {/* DYNAMIC DATA */}
+        {/* DYNAMIC DATA (SensorData) */}
         <section className="mt-8">
           <Suspense fallback={<Loading />}>
             <SensorData />
+          </Suspense>
+        </section>
+
+        {/* DYNAMIC DATA 2 (DeviceStatus - Challenge 3) */}
+        <section className="mt-8">
+          <Suspense 
+            fallback={
+              <div className="rounded-2xl border border-blue-500/10 bg-blue-500/5 p-6 animate-pulse">
+                <p className="text-sm text-blue-400">Memeriksa status perangkat...</p>
+              </div>
+            }
+          >
+            <DeviceStatus />
           </Suspense>
         </section>
 

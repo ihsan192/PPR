@@ -20,6 +20,13 @@ const sensors = [
     icon: "📏",
     description: "Jarak objek",
   },
+  {
+    name: "KELEMBAPAN",
+    value: "62",
+    unit: "%",
+    icon: "💧",
+    description: "Intensitas cahaya",
+  },
 ];
 
 export default function SensorCards() {

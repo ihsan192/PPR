@@ -1,13 +1,20 @@
+import { connection } from 'next/server';
+
 async function getSensorData() {
-  // Simulasi pengambilan data dari API / database
-  await new Promise((resolve) => {
-    setTimeout(resolve, 10000);
-  });
+  // Memasang request-time boundary agar fungsi ini berjalan secara dinamis saat request masuk
+  await connection();
+
+  // Menghasilkan nilai acak setelah request-time boundary menggunakan Math.random()
+  const temperature = Number((20 + Math.random() * 15).toFixed(1)); // Rentang ~20 - 35 °C
+  const light = Math.floor(Math.random() * 100); // Rentang 0 - 100 %
+  const distance = Math.floor(50 + Math.random() * 150); // Rentang 50 - 200 cm
+  const humidity = Math.floor(40 + Math.random() * 40); // Rentang 40 - 80 %
 
   return {
-    temperature: 28.5,
-    light: 75,
-    distance: 120,
+    temperature,
+    light,
+    distance,
+    humidity,
     status: "Normal",
   };
 }
@@ -61,6 +68,16 @@ export default async function SensorData() {
 
           <p className="mt-2 text-2xl font-bold text-white">
             {data.distance} cm
+          </p>
+        </div>
+        
+        <div className="rounded-xl bg-black/20 p-5">
+          <p className="text-sm text-gray-500">
+            Kelembapan
+          </p>
+
+          <p className="mt-2 text-2xl font-bold text-white">
+            {data.humidity}%
           </p>
         </div>
       </div>
